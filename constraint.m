@@ -1,6 +1,6 @@
 function [cin, ceq] = constraint(X)
 
-global LAMBDA T L RHOc E2 E3 Cr Dr RHOm;
+global T RHOc E2 E3 Cr Dr RHOm;
 
     rho = zeros(5, 120); %create a zero matrix for traffic denisty(RHO) with size [i,k]
     v = zeros(5, 120); %create a zero matrix for velocity with size [i,k]
