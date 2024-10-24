@@ -23,10 +23,11 @@ LAMBDA = 3; % [lanes]
 Dr = 1500;
 
 options = optimoptions('fmincon', 'Algorithm', 'SQP', 'MaxFunctionEvaluations', 3e5);
+
 %% Q4
 
 z=ones(2,120);
-z(1,:)=120*z(1,:);
+z(1,:)=60*z(1,:);
 lb = ones(2,120);
 lb(1,:) = 60*lb(1,:);
 ub = ones(2,120);

@@ -11,7 +11,7 @@ global LAMBDA T L RHOc E2 E3 Cr Dr RHOm;
     
     for k=1:120
         if k < 60
-            q0 = 0.8*(7000 + 100*E2);
+            q0 = 0.6*(7000 + 100*E2);
         else
             q0 = 2000 + 100*E3;
         end
