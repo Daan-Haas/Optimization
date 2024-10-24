@@ -22,35 +22,36 @@ L = 1; % [km]
 LAMBDA = 3; % [lanes]
 Dr = 1500;
 
-options = optimoptions('fmincon', 'Algorithm', 'sqp', 'MaxFunctionEvaluations', 3e4);
+options = optimoptions('fmincon', 'Algorithm', 'SQP', 'MaxFunctionEvaluations', 3e5);
 %% Q4
+
 z=ones(2,120);
-z(1,:)=60*z(1,:);
+z(1,:)=120*z(1,:);
 lb = ones(2,120);
 lb(1,:) = 60*lb(1,:);
 ub = ones(2,120);
 ub(1,:) = 120*ub(1,:);
 
-Xbar = fmincon(@costfunc2,z,[],[],[],[],lb,ub,[],options);
-
+Xbar = fmincon(@costfunc2,z,[],[],[],[],lb,ub,@constraint,options);
 
 %% Q5
+
 z=ones(2,120);
-z(1,:)=120*z(1,:);
+z(1,:)=60*z(1,:);
 lb = 60*ones(2,120);
 lb(2,:) = 0*lb(1,:);
 ub = ones(2,120);
 ub(1,:) = 120*ub(1,:);
-Xbar = fmincon(@costfunc2,z,[],[],[],[],lb,ub,[], options);
+
+Xbar = fmincon(@costfunc2,z,[],[],[],[],lb,ub,@constraint, options);
 
 %% Q8
 
 lb = ones(1,240);
 ub = 4*ones(1,240);
-Hbar = ga(@costfunc3,240,[],[],[],[],lb,ub,[],1:240);
+Hbar = ga(@costfunc3,240,[],[],[],[],lb,ub,@gaconstraint,1:240);
 
 for i=1:120
     Xbar(1,i) = 40+20*Hbar(i);
     Xbar(2, i) = Hbar(2*i)/5;
 end
-    

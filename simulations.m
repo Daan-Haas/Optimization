@@ -30,7 +30,7 @@ v(:,1) = 80 * ones(5,1);
 
 for k=1:120
     if k < 60
-        q0 = (7000 + 100*E2)*0.6;
+        q0 = 0.6*(7000 + 100*E2);
     else
         q0 = 2000 + 100*E3;
     end
@@ -98,3 +98,9 @@ ylabel('Ramp metering rate')
 hold on
 plot(Xbar(2,:))
 
+%% Activate for no control case
+Xbar = ones(2,120);
+Xbar(1,:) = 120*Xbar(1,:);
+
+%% Load optimal solutions
+Xbar = load('INT').Xbar;

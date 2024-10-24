@@ -1,21 +1,6 @@
 function f=costfunc3(X)
 
-global LAMBDA T L RHOc Vf A TAU MU K ALPHA E2 E3 Cr Dr RHOm;
-
-    % functions
-        function [qi, rhonext] = nextrho(rhoi, qprev, qr, vi)
-            qi = LAMBDA*rhoi*vi;
-            rhonext = min([rhoi + (T/(LAMBDA*L))*(qprev - qi + qr) RHOc]);
-        end
-    
-    
-        function vnext = nextv(vi, vprev, rhonext, rhoi, VSL)
-            Vi = min([(1+ALPHA)*VSL; Vf*exp((-1/A)*(rhoi/RHOc)^A)]);
-            posterm = vi + (T/TAU)*(Vi - vi) + (T/L)*vi*(vprev - vi);
-            negterm = ((MU * T * (rhonext - rhoi))/(TAU * L * (rhoi + K)));
-            vnext = posterm - negterm;
-        end
-
+global LAMBDA T L RHOc E2 E3 Cr Dr RHOm;
     
     % Simulation
     rho = zeros(5, 120);
@@ -26,7 +11,7 @@ global LAMBDA T L RHOc Vf A TAU MU K ALPHA E2 E3 Cr Dr RHOm;
     
     for k=1:120
         if k < 60
-            q0 = 0.6*(7000 + 100*E2);
+            q0 = 0.8*(7000 + 100*E2);
         else
             q0 = 2000 + 100*E3;
         end
